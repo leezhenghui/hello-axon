@@ -31,6 +31,6 @@ public class CalculatorAggregateConfig {
 
     @Bean
     public EventSourcingRepository<CalculatorAggregate> calculatorRepository(EventStore eventStore, Snapshotter snapshotter) {
-        return new EventSourcingRepository<CalculatorAggregate>(CalculatorAggregate.class, eventStore, new EventCountSnapshotTriggerDefinition(snapshotter, 3));
+        return new EventSourcingRepository<CalculatorAggregate>(CalculatorAggregate.class, eventStore, new EventCountSnapshotTriggerDefinition(snapshotter, 1));
     }
 }

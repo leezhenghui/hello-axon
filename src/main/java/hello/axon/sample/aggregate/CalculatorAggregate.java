@@ -92,7 +92,6 @@ public class CalculatorAggregate implements Serializable {
 
     public double getResult() {
         LOG.info("Result: {}", this.value);
-        Thread.dumpStack();
         return this.value;
     }
 }

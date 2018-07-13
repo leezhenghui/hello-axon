@@ -25,7 +25,7 @@ public class CalculatorAggregate implements Serializable {
     @AggregateIdentifier
     private String id;
 
-    private double value;
+    private double result;
     private String owner;
 
     public CalculatorAggregate() {
@@ -67,7 +67,7 @@ public class CalculatorAggregate implements Serializable {
     protected void on(CalculatorCreatedEvent cce) {
         this.id = cce.id;
         this.owner = cce.owner;
-        this.value = cce.initValue;
+        this.result = cce.initValue;
     }
 
     @EventSourcingHandler
@@ -77,21 +77,21 @@ public class CalculatorAggregate implements Serializable {
 
     @EventSourcingHandler
     protected void on(AddedEvent ae) {
-        this.value += ae.num;
+        this.result += ae.num;
     }
 
     @EventSourcingHandler
     protected void on(SubstractedEvent se) {
-        this.value -= se.num;
+        this.result -= se.num;
     }
 
     @EventSourcingHandler
     protected void on(ResetEvent re) {
-        this.value = 0;
+        this.result = 0;
     }
 
     public double getResult() {
-        LOG.info("Result: {}", this.value);
-        return this.value;
+        LOG.info("==> [Result]: {}", this.result);
+        return this.result;
     }
 }

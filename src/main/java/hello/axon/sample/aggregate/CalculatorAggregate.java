@@ -42,7 +42,6 @@ public class CalculatorAggregate implements Serializable {
     protected void on(DestroyCalculatorCommand dcc) {
         Assert.notNull(dcc.id, "Invalid id in destroyCalculator command");
         AggregateLifecycle.apply(new CalculatorDestroyedEvent(dcc.getId()));
-
     }
 
     @CommandHandler

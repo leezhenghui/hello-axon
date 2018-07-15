@@ -77,6 +77,7 @@ public class CalculatorAggregate implements Serializable {
     @EventSourcingHandler
     protected void on(AddedEvent ae) {
         this.result += ae.num;
+        // Thread.dumpStack();
     }
 
     @EventSourcingHandler

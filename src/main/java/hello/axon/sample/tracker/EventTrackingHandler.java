@@ -1,4 +1,4 @@
-package hello.axon.sample.listeners;
+package hello.axon.sample.tracker;
 
 import hello.axon.sample.events.*;
 import org.axonframework.config.ProcessingGroup;
@@ -8,9 +8,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 @Component
-@ProcessingGroup("subscribingpoint")
-public class EventLoggingHandler {
-    private static final Logger LOG = LoggerFactory.getLogger(EventLoggingHandler.class);
+@ProcessingGroup("trackingpoint")
+public class EventTrackingHandler {
+
+    private static final Logger LOG = LoggerFactory.getLogger(EventTrackingHandler.class);
 
     @EventHandler
     public void on(CalculatorCreatedEvent cce) {
@@ -37,5 +38,4 @@ public class EventLoggingHandler {
     public void on(CalculatorDestroyedEvent de) {
         LOG.info("EventType: {} ID: {}", CalculatorDestroyedEvent.class.getName(), de.id);
     }
-
 }

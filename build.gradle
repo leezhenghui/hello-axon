@@ -1,9 +1,11 @@
 buildscript {
     ext {
         springBootVersion = '2.0.3.RELEASE'
-        axonVersion = '3.3.1'
+        axonVersion = '3.3.2'
+        kafkaVersion = '1.0.0'
     }
     repositories {
+        mavenLocal()
         mavenCentral()
     }
     dependencies {
@@ -21,9 +23,9 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
-
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web') {
@@ -32,6 +34,11 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-jetty')
     compile('org.springframework.boot:spring-boot-starter-data-mongodb')
     compile("org.axonframework:axon-spring-boot-starter:${axonVersion}")
+    compile("org.axonframework:axon-kafka:${axonVersion}")
+    compile("org.apache.kafka:kafka_2.12:${kafkaVersion}") {
+        exclude module: 'jackson-databind'
+        exclude module: 'slf4j-log4j12'
+    }
     compile("org.axonframework:axon-mongo:${axonVersion}")
 
     testCompile('org.springframework.boot:spring-boot-starter-test')

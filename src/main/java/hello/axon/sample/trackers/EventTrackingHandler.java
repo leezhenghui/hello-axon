@@ -1,4 +1,4 @@
-package hello.axon.sample.tracker;
+package hello.axon.sample.trackers;
 
 import hello.axon.sample.events.*;
 import org.axonframework.config.ProcessingGroup;

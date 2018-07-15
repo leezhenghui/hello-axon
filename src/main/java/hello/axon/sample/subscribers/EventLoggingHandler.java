@@ -1,4 +1,4 @@
-package hello.axon.sample.listeners;
+package hello.axon.sample.subscribers;
 
 import hello.axon.sample.events.*;
 import org.axonframework.config.ProcessingGroup;

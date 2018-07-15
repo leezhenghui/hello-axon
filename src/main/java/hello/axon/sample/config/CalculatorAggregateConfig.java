@@ -1,12 +1,9 @@
 package hello.axon.sample.config;
 
 import com.mongodb.MongoClient;
-import com.mongodb.MongoClientOptions;
 import com.mongodb.ServerAddress;
 import hello.axon.sample.aggregate.CalculatorAggregate;
-import org.axonframework.config.EventHandlingConfiguration;
-import org.axonframework.eventhandling.EventProcessor;
-import org.axonframework.eventhandling.TrackedEventMessage;
+import org.axonframework.eventhandling.tokenstore.TokenStore;
 import org.axonframework.eventsourcing.*;
 import org.axonframework.eventsourcing.eventstore.EventStorageEngine;
 import org.axonframework.eventsourcing.eventstore.EventStore;
@@ -14,21 +11,19 @@ import org.axonframework.kafka.eventhandling.DefaultKafkaMessageConverter;
 import org.axonframework.kafka.eventhandling.KafkaMessageConverter;
 import org.axonframework.kafka.eventhandling.consumer.Fetcher;
 import org.axonframework.kafka.eventhandling.consumer.KafkaMessageSource;
-import org.axonframework.messaging.StreamableMessageSource;
 import org.axonframework.mongo.DefaultMongoTemplate;
 import org.axonframework.mongo.MongoTemplate;
 import org.axonframework.mongo.eventsourcing.eventstore.MongoEventStorageEngine;
 import org.axonframework.mongo.eventsourcing.eventstore.MongoFactory;
+import org.axonframework.mongo.eventsourcing.tokenstore.MongoTokenStore;
 import org.axonframework.serialization.Serializer;
 import org.axonframework.spring.eventsourcing.SpringAggregateSnapshotterFactoryBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.util.Arrays;
-import java.util.Iterator;
 
 @Configuration
 public class CalculatorAggregateConfig {
@@ -97,5 +92,10 @@ public class CalculatorAggregateConfig {
     @Bean
     public KafkaMessageSource<String, byte[]> kafkaMessageSource(Fetcher<String, byte[]> kafkaFetcher) {
         return new KafkaMessageSource<>(kafkaFetcher);
+    }
+
+    @Bean
+    public TokenStore tokenStore(Serializer serializer) {
+        return new MongoTokenStore(axonMongoTemplate(), serializer);
     }
 }

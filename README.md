@@ -10,9 +10,10 @@
 
 ### How to run
 
-## Message Hanlding
+## Message Processors
 
-![Inside Message Handling](./docs/messagehandling.png)
+![Inside Message Processors](./docs/messagehandling.png)
 
 ## Performance
 
+# Wrap it up

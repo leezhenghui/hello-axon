@@ -17,6 +17,7 @@ import org.axonframework.mongo.eventsourcing.eventstore.MongoEventStorageEngine;
 import org.axonframework.mongo.eventsourcing.eventstore.MongoFactory;
 import org.axonframework.mongo.eventsourcing.tokenstore.MongoTokenStore;
 import org.axonframework.serialization.Serializer;
+import org.axonframework.serialization.json.JacksonSerializer;
 import org.axonframework.spring.eventsourcing.SpringAggregateSnapshotterFactoryBean;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -98,4 +99,9 @@ public class CalculatorAggregateConfig {
     public TokenStore tokenStore(Serializer serializer) {
         return new MongoTokenStore(axonMongoTemplate(), serializer);
     }
+
+//    @Bean
+//    public Serializer eventSerializer() {
+//        return new JacksonSerializer();
+//    }
 }
